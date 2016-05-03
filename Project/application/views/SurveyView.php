@@ -22,14 +22,22 @@
                 }
             });
 
+
+
+            /* ### Deze wou ik gebruiken om de Array terug te sturen naar PHP zodat ik er makkelijker mee een form zou kunnen maken
+            --- is dit de moeite? of kan ik de array beter in Javascript/jquery laten om de form te maken? 
+             */
+
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url()?>index.php/SurveyView/",
+                url: "<?php // echo base_url()?>index.php/SurveyView/",
                 data: {'data': obj},
                 success: function (data) {
                     window.alert(data);
                 }
             });
+
+            */
 
             //window.alert(obj[0].vraag_id + "\n" + obj[0].survey_id + "\n" + obj[0].vraag_body + "\n" + obj[0].vraag_soort);
         }
