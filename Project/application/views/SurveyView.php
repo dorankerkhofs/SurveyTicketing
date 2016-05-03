@@ -9,18 +9,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script type="text/javascript">
 
-        function getIdDropdown(){
-            var selectedVal = document.getElementById("dropDownKeuze").selectedIndex;
+        function getIdDropdown() {
+            var selectedVal = {'data': document.getElementById("dropDownKeuze").selectedIndex};
 
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url()?>index.php/SurveyController/loadQuestions/",
+                url: "<?php echo base_url()?>index.php/SurveyController/getQuestionsById/",
                 data: selectedVal,
                 success: function (data) {
-                    window.alert("het werkt");
+                    obj = JSON.parse(data);
+
                 }
             });
 
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url()?>index.php/SurveyView/",
+                data: {'data': obj},
+                success: function (data) {
+                    window.alert(data);
+                }
+            });
+
+            //window.alert(obj[0].vraag_id + "\n" + obj[0].survey_id + "\n" + obj[0].vraag_body + "\n" + obj[0].vraag_soort);
         }
 
     </script>
@@ -29,6 +40,7 @@
 
 <body>
 <h1>vragenlijst<br/></h1>
+
 
 <?php
 
