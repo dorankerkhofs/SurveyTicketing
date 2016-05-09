@@ -14,7 +14,13 @@
 <?php
 $i = 1;
 echo '<br>';
-echo form_open();
+
+$aantalVragen = count($vragen);
+$surveyID = $vragen[0]->survey_id;
+$vraagID = $vragen[0]->vraag_id;
+
+
+echo form_open(base_url()."index.php/SurveyController");
 
 foreach ($vragen as $vraag) {
 
@@ -87,6 +93,9 @@ foreach ($vragen as $vraag) {
     $i++;
 }
 
+echo form_hidden("hiddenVraagID", $vraagID);
+echo form_hidden("hiddenSurveyID", $surveyID);
+echo form_hidden("hiddenAantal", $aantalVragen);
 echo form_submit('mysubmit', 'Submit Post!');
 echo form_close();
 
