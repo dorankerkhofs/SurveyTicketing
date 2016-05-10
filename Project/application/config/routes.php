@@ -52,7 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['default_controller'] = 'AdminController';
 //$route['default_controller'] = 'VoegSurveyToeController';
 //$route['default_controller'] = 'DropController';
-$route['default_controller'] = 'BekijkResultatenController';
+//$route['default_controller'] = 'BekijkResultatenController';
+$route['default_controller'] = 'MainController';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

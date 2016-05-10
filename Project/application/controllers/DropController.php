@@ -6,20 +6,6 @@ class DropController extends CI_Controller
 
     public function index()
     {
-        //loading helper classes
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        //loading models
-        $this->load->model('SurveyModel');
-
-        //functions
-        $this->loadDropdown();
-    }
-
-    public function loadDropdown()
-    {
         $data['records'] = $this->SurveyModel->getSurveys();
 
         $this->load->view('SurveyView', $data);
@@ -30,7 +16,7 @@ class DropController extends CI_Controller
         } else {
             $id = $this->input->post('nameDrop');
             $vragen['vragen'] = $this->SurveyModel->getVragen($id);
-            $this->load->view('vragenView', $vragen);
+            $this->load->view('VragenView', $vragen);
         }
     }
 

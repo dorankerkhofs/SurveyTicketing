@@ -21,7 +21,6 @@ foreach ($records as $option) {
 }
 
 echo form_open(base_url()."index.php/DropController");
-
 echo form_dropdown("nameDrop", $options);
 echo form_submit('mysubmit', 'Kies deze survey!');
 echo form_close();

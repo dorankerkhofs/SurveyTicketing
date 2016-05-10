@@ -5,14 +5,14 @@
     <meta charset="utf-8">
 
     <style>
-        table {
-            border: 1px solid black;
-            margin: 15px;
-            padding: 10px;
-        }
 
         td {
-            width: 80px;
+            width: 300px;
+        }
+
+        body{
+            padding: 5px;
+            margin:5px;
         }
 
     </style>
@@ -25,7 +25,8 @@
 
         function getIdDropdown() {
 
-            var selectedVal = {'data': $("#dropDownKeuze").val()}; //opvragen via selectedVal.data
+
+            var selectedVal = {'data': $("select[name=keuze] option:selected").index()};
 
             $.ajax({
                 type: "POST",
@@ -33,9 +34,9 @@
                 data: selectedVal,
                 success: function (data) {
 
-                    $('#vragen').html("");
-
                     var obj = JSON.parse(data);
+
+                    $('#vragen').html("");
 
                     if (obj.length > 0) {
                         try {
@@ -46,21 +47,19 @@
                                     "<td>" + val.antwoord_body + "</td>"
                                 ));
                             });
+
                             $('#vragen tbody').append.apply($('#vragen'), items);
                         } catch (e) {
-                            errorpopup("Error bij request ! probeer opnieuw...");
+                            errorpopup("Error, probeer opnieuw...");
                             ;
                         }
                     } else {
-                        errorpopup("Geen gebruiker gevonden");
+                        errorpopup("Geen vragen gevonden");
                     }
-
-
                 },
                 error: function () {
                     errorpopup("Error tijdens request..");
                 }
-
             });
         }
 
@@ -72,16 +71,17 @@
 <body>
 
 <?php
+
 $options = array();
 $i = 0;
 
-foreach ($antwoorden as $antwoord) {
-    if (!in_array($antwoord->survey_id, $options)) {
-        $options[$i] = $antwoord->survey_id;
+foreach ($surveys as $survey) {
+    if (!in_array($survey->survey_name, $options)) {
+        $options[$i] = $survey->survey_name;
         $i++;
     }
-
 }
+
 ?>
 <select name="keuze" id="dropDownKeuze"
         onchange="getIdDropdown()"> <?php //moet veranderd worden, mag niet onchange via deze manier ?>
@@ -94,6 +94,7 @@ foreach ($antwoorden as $antwoord) {
 
 <table id="checkTabel">
     <thead>
+    <th id="surveyName"></th>
     <tr>
         <th>Vraag</th>
         <th>Antwoord</th>

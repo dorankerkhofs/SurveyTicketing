@@ -47,9 +47,12 @@ class SurveyModel extends CI_Model
     public function getJoin($surveyid)
     {
 
-        $query = $this->db->query('select sv.vraag_body, sa.antwoord_body
-                                    from survey_vragen sv join survey_antwoorden sa
+        $query = $this->db->query('select s.survey_name, sv.vraag_body, sa.antwoord_body
+                                    from survey_vragen sv
+                                    join survey_antwoorden sa
                                     on sv.survey_id = sa.survey_id
+                                    join survey s
+                                    on s.survey_id = sa.survey_id
                                     where sa.vraag_id = sv.vraag_id
                                     and sa.survey_id = '.$surveyid);
 
