@@ -5,34 +5,47 @@
     <meta charset="utf-8">
 
     <title>Vragen toevoegen</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+
+        $('#inputKnop').on('click', function () {
+            var surveyName = {'data': $('#dataID').val()};
+
+            if (surveyName != '') {
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url()?>index.php/VoegSurveyToeController/addSurvey/",
+                    data: surveyName,
+                    success: function (data) {
+                    }
+                });
+            } else {
+                window.alert("Veld mag niet leeg zijn!");
+            }
+
+        });
+
+    </script>
+
+    <style>
+        .btn-success{
+
+        }
+
+    </style>
 </head>
 
 <body>
 
-<?php
-echo '<br>';
-
-echo form_open();
-echo validation_errors();
-echo form_fieldset('Survey toevoegen');
-echo 'Naam survey:';
-echo '<br>';
-$inputTekst = array(
-    'name' => 'dataNaam',
-    'id' => 'dataID',
-    'value' => '',
-    'maxlength' => '100',
-    'size' => '30',
-    'style' => 'width:35%',
-);
-echo form_input($inputTekst);
-
-echo '<br><br>';
-
-echo form_submit('mysubmit', 'Submit Post!');
-echo form_fieldset_close();
-echo form_close();
-?>
+<p>Naam survey</p>
+<br>
+<input type="text" name="dataNaam" id="dataID" value="" maxlength="100" size="30" style="width: 35%"/>
+<br><br>
+<input type="submit" class="btn btn-success btn-small" name="inputKnop" id="inputKnop" value="Voeg toe!"/>
 
 
 </body>

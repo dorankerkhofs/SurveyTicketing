@@ -10,9 +10,9 @@
             width: 300px;
         }
 
-        body{
+        body {
             padding: 5px;
-            margin:5px;
+            margin: 5px;
         }
 
     </style>

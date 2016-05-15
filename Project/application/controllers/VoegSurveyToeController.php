@@ -6,17 +6,13 @@ class VoegSurveyToeController extends CI_Controller
 
     public function index()
     {
-        $this->form_validation->set_rules('dataNaam', 'SurveyNaam', 'required');
+        $this->load->view('VoegSurveyToeView');
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('VoegSurveyToeView');
-        } else {
-            $dataarray = array(
-                'survey_id' => NULL,
-                'survey_name' => $this->input->post('dataNaam'),
-            );
+    }
 
-            $this->SurveyModel->form_insert_surveys($dataarray);
-        }
+
+    public function addSurvey(){
+        $insert = array('survey_name' => $this->input->post('data'));
+        $this->SurveyModel->form_insert_surveys($insert);
     }
 }

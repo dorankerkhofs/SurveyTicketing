@@ -8,23 +8,17 @@ class AdminController extends CI_Controller
     {
         $data['records'] = $this->SurveyModel->getSurveys();
 
-        $this->form_validation->set_rules('keuze', 'Keuze', 'required');
-        $this->form_validation->set_rules('vraagNaam', 'VraagNaam', 'required');
-        $this->form_validation->set_rules('radioNaam', 'RadioNaam', 'required');
+        $this->load->view('AdminView', $data);
+    }
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('AdminView', $data);
-        } else {
-            $dataarray = array(
-                'vraag_id' => NULL,
-                'survey_id' => $this->input->post('keuze'),
-                'vraag_body' => $this->input->post('vraagNaam'),
-                'vraag_soort' => $this->input->post('radioNaam'),
-            );
+    public function insertQuestion(){
 
-            $this->SurveyModel->form_insert_vragen($dataarray);
-        }
+        $surveyName = $this->input->post('first');
+        $surveyQuestion = $this->input->post('second');
+        $surveyType = $this->input->post('third');
 
+        $surveyArray = array("survey_id" => $surveyName, "vraag_body" => $surveyQuestion, "vraag_soort" => $surveyType);
 
+        $this->SurveyModel->form_insert_vragen($surveyArray);
     }
 }
